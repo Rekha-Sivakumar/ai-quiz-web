@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Result</h2>
+
+<h3>Your Score: {{ score }}/{{ total }}</h3>
+
+{% for q, user in answers %}
+<div class="card mb-3 p-3">
+    <p><b>{{ q.question.replace("'''","") }}</b></p>
+    <p>Your Answer: {{ user }}</p>
+    <p>Correct Answer: {{ q.answer }}</p>
+    <p><i>{{ q.explanation }}</i></p>
+</div>
+{% endfor %}
+
+<a href="/" class="btn btn-secondary">Home</a>
+{% endblock %}

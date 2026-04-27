@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Create Quiz</h2>
+
+<form method="POST">
+    <input class="form-control mb-3" name="topic" placeholder="Enter topic">
+    <button class="btn btn-primary">Generate Topic Quiz</button>
+</form>
+
+<hr>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="pdf" class="form-control mb-3">
+    <button class="btn btn-success">Generate PDF Quiz</button>
+</form>
+{% endblock %}
