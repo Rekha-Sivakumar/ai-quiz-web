@@ -1,6 +1,6 @@
-from google import genai
+import os
+from openai import OpenAI
 
-# Set your API key here OR use environment variable
-
-
-client = genai.Client(api_key="AIzaSyAQnCje-nauIJIrP6IG76_N9F-oQJNxgTo")
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
