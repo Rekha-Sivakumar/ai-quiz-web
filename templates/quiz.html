@@ -6,7 +6,8 @@
 {% for q in questions %}
 {% set outer_loop = loop %}
 <div class="card mb-3 p-3">
-    <h5>Q{{ outer_loop.index }}. {{ q.question.replace("'''","") }}</h5>
+    <h5 class="mb-1">Q{{ outer_loop.index }}.</h5>
+    <div class="question-text mb-2">{{ q.question | format_question }}</div>
 
     {% for opt in q.options %}
     <div class="form-check">
