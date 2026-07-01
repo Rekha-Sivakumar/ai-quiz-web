@@ -2,16 +2,30 @@
 {% block content %}
 <h2>Result</h2>
 
-<h3>Your Score: {{ score }}/{{ total }}</h3>
+{% set pct = (score / total * 100) | round(0, 'floor') if total else 0 %}
+<h3>
+    Your Score: {{ score }}/{{ total }}
+    <span class="badge {{ 'bg-success' if pct >= 70 else ('bg-warning text-dark' if pct >= 40 else 'bg-danger') }}">
+        {{ pct | int }}%
+    </span>
+</h3>
 
 {% for q, user in answers %}
-<div class="card mb-3 p-3">
+{% set is_correct = user == q.answer %}
+<div class="card mb-3 p-3 {{ 'border-success' if is_correct else 'border-danger' }}">
     <p><b>{{ q.question.replace("'''","") }}</b></p>
-    <p>Your Answer: {{ user }}</p>
-    <p>Correct Answer: {{ q.answer }}</p>
+    <p>Your Answer:
+        <span class="{{ 'text-success' if is_correct else 'text-danger' }}">
+            {{ user if user else "(no answer)" }}
+        </span>
+        {% if is_correct %}✅{% else %}❌{% endif %}
+    </p>
+    {% if not is_correct %}
+    <p>Correct Answer: <b>{{ q.answer }}</b></p>
+    {% endif %}
     <p><i>{{ q.explanation }}</i></p>
 </div>
 {% endfor %}
 
-<a href="/" class="btn btn-secondary">Home</a>
+<a href="/" class="btn btn-secondary">Try Another Quiz</a>
 {% endblock %}
