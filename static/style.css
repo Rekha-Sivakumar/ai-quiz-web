@@ -1,3 +1,22 @@
-
 body { background-color: #f8f9fa; }
 .card { border-radius: 10px; }
+
+.code-block {
+  background: #1e1e2e;
+  color: #d4d4d4;
+  padding: 0.9em 1.1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin: 0.6em 0;
+  white-space: pre;
+  text-align: left;
+}
+
+.code-block code {
+  color: #d4d4d4;
+  background: none;
+  padding: 0;
+}
