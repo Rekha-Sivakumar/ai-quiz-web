@@ -13,7 +13,7 @@
 {% for q, user in answers %}
 {% set is_correct = user == q.answer %}
 <div class="card mb-3 p-3 {{ 'border-success' if is_correct else 'border-danger' }}">
-    <p><b>{{ q.question.replace("'''","") }}</b></p>
+    <div class="question-text"><b>{{ q.question | format_question }}</b></div>
     <p>Your Answer:
         <span class="{{ 'text-success' if is_correct else 'text-danger' }}">
             {{ user if user else "(no answer)" }}
