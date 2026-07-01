@@ -59,9 +59,14 @@ Format:
     def fallback():
         return [
             {
-                "question": "What is OOP?",
-                "options": ["A. Concept", "B. Language", "C. Tool", "D. None"],
+                "question": "The AI quiz generator is temporarily unavailable, "
+                             "so here's a sample question instead. What is OOP?",
+                "options": ["A. A programming paradigm based on objects",
+                             "B. A markup language",
+                             "C. A database engine",
+                             "D. A network protocol"],
                 "answer": "A",
-                "explanation": "OOP is a programming concept."
+                "explanation": "OOP (Object-Oriented Programming) organizes code "
+                                "around objects that bundle data and behavior."
             }
         ]
