@@ -1,13 +1,34 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from markupsafe import Markup, escape
 from ai_generator import AIGenerator
 from pdf_handler import PDFHandler
 import os
+import re
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key-change-me")
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
+def format_question(text):
+    """Render ```code``` or '''code''' segments as monospace code blocks,
+    escaping everything else safely for HTML output."""
+    if not text:
+        return ""
+    # support both ''' and ``` as code fences
+    parts = re.split(r"(?:'''|```)(.*?)(?:'''|```)", text, flags=re.DOTALL)
+    html = ""
+    for i, part in enumerate(parts):
+        if i % 2 == 0:
+            html += str(escape(part)).replace("\n", "<br>")
+        else:
+            html += f'<pre class="code-block"><code>{escape(part.strip())}</code></pre>'
+    return Markup(html)
+
+
+app.jinja_env.filters["format_question"] = format_question
 
 @app.route("/", methods=["GET", "POST"])
 def index():
